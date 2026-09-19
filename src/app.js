@@ -1,5 +1,5 @@
 const express = require('express');
-require('dotenv').config(); // Para usar variables de entorno
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,8 +17,9 @@ app.get('/', (req, res) => {
     });
 });
 
-// Aquí irás agregando las rutas de users, workouts, etc.
-// Ejemplo: app.use('/api/v1/users', require('./routes/users'));
+// --- IMPORTAR RUTAS ---
+const usersRouter = require('./routes/users');
+app.use('/api/v1/users', usersRouter);
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
