@@ -4,23 +4,27 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware para parsear JSON y datos de formularios
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Ruta de prueba inicial
 app.get('/', (req, res) => {
-    res.json({ 
-        message: 'Bienvenido a Workout Tracker API',
-        status: 'OK',
-        version: '1.0.0'
-    });
+    res.json({ message: 'Bienvenido a Workout Tracker API', status: 'OK' });
 });
 
-// --- IMPORTAR RUTAS ---
+// --- RUTAS ---
 const usersRouter = require('./routes/users');
 app.use('/api/v1/users', usersRouter);
 
+const workoutsRouter = require('./routes/workouts');
+app.use('/api/v1/workouts', workoutsRouter);
+
+const exercisesRouter = require('./routes/exercises');
+app.use('/api/v1/exercises', exercisesRouter);
+
+const progressRouter = require('./routes/progress');
+app.use('/api/v1/progress', progressRouter);
+
+// 👇 ESTO VA AL FINAL, SIEMPRE
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
