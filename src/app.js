@@ -15,10 +15,16 @@ app.get('/', (req, res) => {
 const usersRouter = require('./routes/users');
 app.use('/api/v1/users', usersRouter);
 
-// 👇 AGREGA ESTAS LÍNEAS
 const workoutsRouter = require('./routes/workouts');
 app.use('/api/v1/workouts', workoutsRouter);
 
+const exercisesRouter = require('./routes/exercises');
+app.use('/api/v1/exercises', exercisesRouter);
+
+const progressRouter = require('./routes/progress');
+app.use('/api/v1/progress', progressRouter);
+
+// 👇 ESTO VA AL FINAL, SIEMPRE
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
